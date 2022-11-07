@@ -13,7 +13,7 @@ model Users {
   password    String
   isAvailable Boolean      @default(true)
   created_at  DateTime     @default(now())
-  updated_at  DateTime
+  updated_at  DateTime     @default(now())      
   RecipeBook  RecipeBook[]
 }
 
@@ -24,7 +24,7 @@ model RecipeBook {
   recipe_book_name String
   isAvailable      Boolean   @default(true)
   created_at       DateTime  @default(now())
-  updated_at       DateTime
+  updated_at       DateTime  @default(now())
   Recipes          Recipes[]
 }
 
@@ -38,7 +38,7 @@ model Recipes {
   photo          String
   isAvailable    Boolean        @default(true)
   created_at     DateTime       @default(now())
-  updated_at     DateTime
+  updated_at     DateTime       @default(now())
   Instructions   Instructions[]
   Ingredients    Ingredients[]
 }
@@ -48,7 +48,7 @@ model Categories {
   category_name String
   isAvailable   Boolean   @default(true)
   created_at    DateTime  @default(now())
-  updated_at    DateTime
+  updated_at    DateTime  @default(now())
   Recipes       Recipes[]
 }
 
@@ -59,7 +59,7 @@ model Instructions {
   ingredient_name String
   isAvailable     Boolean  @default(true)
   created_at      DateTime @default(now())
-  updated_at      DateTime
+  updated_at      DateTime @default(now())
 }
 
 model Ingredients {
@@ -69,5 +69,5 @@ model Ingredients {
   instrucction String   @db.VarChar(255)
   isAvailable  Boolean  @default(true)
   created_at   DateTime @default(now())
-  updated_at   DateTime
+  updated_at   DateTime @default(now())
 }

@@ -24,11 +24,11 @@ git add -A .
 
 
 # Testing the app with Jest
-yarn test ||
-(
-    echo '🚨 Jest Check Failed. Make the required changes listed above, add changes and try to commit again.'
-    false;
-)
+#yarn test ||
+#(
+#    echo '🚨 Jest Check Failed. Make the required changes listed above, add changes and try to commit again.'
+#    false;
+#)
 
 echo 'Code looks good... Trying to build now. 🚧🚧🚧'
 
