@@ -9,27 +9,53 @@ export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
+    const salt = 10;
+    const hashedPassword = await this.encryptPassword(createUserDto.password);
     return await this.prisma.users.create({
       data: {
         username: createUserDto.username,
-        password: createUserDto.password,
+        password: hashedPassword,
       },
     });
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.prisma.users.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    return await this.prisma.users.findUnique({
+      where: {
+        id: id,
+      },
+    });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    return await this.prisma.users.update({
+      where: {
+        id: id,
+      },
+      data: {
+        username: updateUserDto.username,
+        password: await this.encryptPassword(updateUserDto.password),
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    return await this.prisma.users.update({
+      where: {
+        id: id,
+      },
+      data: {
+        isAvailable: false,
+      },
+    });
+  }
+
+  encryptPassword(password: string) {
+    const salt = 10;
+    return bcrypt.hash(password, salt);
   }
 }
